@@ -16,7 +16,7 @@ public class HotelService {
      */
     public List<Hotel> getHotels() throws Exception {
         // SQL query
-        String sql = "SELECT * FROM hotels";
+        String sql = "SELECT * FROM hotelchain.hotel"; // Assuming the table name is "hotel"
         // Database connection object
         ConnectionDB db = new ConnectionDB();
         // Data structure to store all hotels retrieved from database
@@ -78,7 +78,7 @@ public class HotelService {
         String message = "";
 
         // SQL query
-        String sql = "DELETE FROM hotels WHERE hotelId = ?";
+        String sql = "DELETE FROM hotelchain.hotel WHERE hotelId = ?";
 
         // Try to connect to the database, catch any exceptions
         try (Connection con = db.getConnection()) {
@@ -123,7 +123,7 @@ public class HotelService {
         String message = "";
 
         // SQL query
-        String sql = "INSERT INTO hotels (chainId, city, name, email, phone, numOfRooms, category) " +
+        String sql = "INSERT INTO hotelchain.hotel (chainId, city, name, email, phone, numOfRooms, category) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         // Try to connect to the database, catch any exceptions
@@ -173,7 +173,7 @@ public class HotelService {
         String message = "";
 
         // SQL query
-        String sql = "UPDATE hotels SET chainId=?, city=?, name=?, email=?, phone=?, numOfRooms=?, category=? WHERE hotelId=?";
+        String sql = "UPDATE hotelchain.hotel SET chainId=?, city=?, name=?, email=?, phone=?, numOfRooms=?, category=? WHERE hotelId=?";
 
         // Try to connect to the database, catch any exceptions
         try (Connection con = db.getConnection()) {
