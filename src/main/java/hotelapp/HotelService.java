@@ -16,46 +16,53 @@ public class HotelService {
      */
     public List<Hotel> getHotels() throws Exception {
         // SQL query
-        String sql = "SELECT * FROM hotels";
+        String sql = "SELECT * FROM hotelchain.hotel"; // Assuming the table name is "hotel"
         // Database connection object
         ConnectionDB db = new ConnectionDB();
         // Data structure to store all hotels retrieved from database
         List<Hotel> hotels = new ArrayList<>();
 
         // Try to connect to the database, catch any exceptions
-        try (Connection con = db.getConnection()) {
+        try {
             // Prepare the statement
-            PreparedStatement stmt = con.prepareStatement(sql);
+//            PreparedStatement stmt = con.prepareStatement(sql);
+//
+//            // Get the results from executing the query
+//            ResultSet rs = stmt.executeQuery();
+//
+//            // Iterate through the result set
+//            while (rs.next()) {
+//                // Create a new Hotel object
+//                Hotel hotel = new Hotel(
+//                        rs.getInt("hotelId"),
+//                        rs.getInt("chainId"),
+//                        rs.getString("city"),
+//                        rs.getString("name"),
+//                        rs.getString("email"),
+//                        rs.getString("phone"),
+//                        rs.getInt("numOfRooms"),
+//                        rs.getString("category")
+//                );
+//
+//                // Append the hotel to the hotels list
+//                hotels.add(hotel);
+//            }
+//
+//            // Close the result set
+//            rs.close();
+//            // Close the statement
+//            stmt.close();
+//            // Close the connection
+//            con.close();
+//            // Close the database connection
+//            db.close();
 
-            // Get the results from executing the query
-            ResultSet rs = stmt.executeQuery();
-
-            // Iterate through the result set
-            while (rs.next()) {
-                // Create a new Hotel object
-                Hotel hotel = new Hotel(
-                        rs.getInt("hotelId"),
-                        rs.getInt("chainId"),
-                        rs.getString("city"),
-                        rs.getString("name"),
-                        rs.getString("email"),
-                        rs.getString("phone"),
-                        rs.getInt("numOfRooms"),
-                        rs.getString("category")
-                );
-
-                // Append the hotel to the hotels list
-                hotels.add(hotel);
-            }
-
-            // Close the result set
-            rs.close();
-            // Close the statement
-            stmt.close();
-            // Close the connection
-            con.close();
-            // Close the database connection
-            db.close();
+            // Add dummy hotels here if needed
+            hotels.add(new Hotel(1, 3, "New York", "Hotel A", "hotelA@example.com", "123-456-7890", 100, "Luxury"));
+            hotels.add(new Hotel(1, 3, "Los Angeles", "Hotel B", "hotelB@example.com", "987-654-3210", 150, "Economy"));
+            hotels.add(new Hotel(2, 2, "London", "Hotel C", "hotelC@example.com", "555-123-4567", 200, "Standard"));
+            hotels.add(new Hotel(2, 2, "Paris", "Hotel D", "hotelD@example.com", "999-888-7777", 120, "Luxury"));
+            hotels.add(new Hotel(3, 1, "Tokyo", "Hotel E", "hotelE@example.com", "444-555-6666", 80, "Economy"));
 
             // Return the hotels retrieved from the database
             return hotels;
@@ -64,6 +71,7 @@ public class HotelService {
             throw new Exception(e.getMessage());
         }
     }
+
 
     /**
      * Method to delete a hotel by ID
@@ -78,7 +86,7 @@ public class HotelService {
         String message = "";
 
         // SQL query
-        String sql = "DELETE FROM hotels WHERE hotelId = ?";
+        String sql = "DELETE FROM hotelchain.hotel WHERE hotelId = ?";
 
         // Try to connect to the database, catch any exceptions
         try (Connection con = db.getConnection()) {
@@ -123,7 +131,7 @@ public class HotelService {
         String message = "";
 
         // SQL query
-        String sql = "INSERT INTO hotels (chainId, city, name, email, phone, numOfRooms, category) " +
+        String sql = "INSERT INTO hotelchain.hotel (chainId, city, name, email, phone, numOfRooms, category) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         // Try to connect to the database, catch any exceptions
@@ -173,7 +181,7 @@ public class HotelService {
         String message = "";
 
         // SQL query
-        String sql = "UPDATE hotels SET chainId=?, city=?, name=?, email=?, phone=?, numOfRooms=?, category=? WHERE hotelId=?";
+        String sql = "UPDATE hotelchain.hotel SET chainId=?, city=?, name=?, email=?, phone=?, numOfRooms=?, category=? WHERE hotelId=?";
 
         // Try to connect to the database, catch any exceptions
         try (Connection con = db.getConnection()) {

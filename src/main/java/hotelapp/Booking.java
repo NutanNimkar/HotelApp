@@ -1,25 +1,27 @@
 package hotelapp;
 import java.util.Date;
 
-public class Renting {
+public class Booking {
     private int bookingId;
     private int customerId;
     private int roomId;
-    private int essn;
+
     private Date checkInDate;
     private Date checkOutDate;
 
+    private Date bookingDate;
+
     // Constructors
-    public Renting() {
+    public Booking() {
     }
 
-    public Renting(int bookingId, int customerId, int roomId, int essn, Date checkInDate, Date checkOutDate) {
+    public Booking(int bookingId, int customerId, int roomId, Date checkInDate, Date checkOutDate, Date bookingData) {
         this.bookingId = bookingId;
         this.customerId = customerId;
         this.roomId = roomId;
-        this.essn = essn;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
+        this.bookingDate = bookingDate;
     }
 
     // Getters and Setters
@@ -47,12 +49,12 @@ public class Renting {
         this.roomId = roomId;
     }
 
-    public int getEssn() {
-        return essn;
+    public Date getBookingDate() {
+        return bookingDate;
     }
 
-    public void setEssn(int essn) {
-        this.essn = essn;
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
     }
 
     public Date getCheckInDate() {
@@ -74,11 +76,11 @@ public class Renting {
     // toString method for debugging and logging
     @Override
     public String toString() {
-        return "Renting{" +
+        return "Booking{" +
                 "bookingId=" + bookingId +
                 ", customerId=" + customerId +
                 ", roomId=" + roomId +
-                ", essn=" + essn +
+                ", bookingDate=" + bookingDate +
                 ", checkInDate=" + checkInDate +
                 ", checkOutDate=" + checkOutDate +
                 '}';
