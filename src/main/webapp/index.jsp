@@ -7,6 +7,7 @@
     <title> Home Page </title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 <%--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">--%>
+    <link rel="stylesheet" href="assets/css/sandbox.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 <%--    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">--%>
 </head>
@@ -19,7 +20,7 @@
     <div class="row" id="row">
         <div class="col-md-4">
             <div class="card" id="rooms-card">
-                <div class="testerBox">
+                <div class="textOL">
                     <h4 class="card-title">Rooms</h4>
                     <p class="card-text">View and manage rooms</p>
                     <a class="btn btn-primary" href="rooms.jsp">View Rooms</a>
@@ -28,7 +29,7 @@
         </div>
         <div class="col-md-4">
             <div class="card" id="bookings-card">
-                <div class="testerBox">
+                <div class="testerBox1">
                     <h4 class="card-title">Bookings</h4>
                     <p class="card-text">View and manage bookings</p>
                     <a class="btn btn-primary" href="bookings.jsp">View Bookings</a>
@@ -37,7 +38,7 @@
         </div>
         <div class="col-md-4">
             <div class="card" id="customers-card">
-                <div class="testerBox">
+                <div class="testerBox1">
                     <h4 class="card-title">Customers</h4>
                     <p class="card-text">View and manage customers</p>
                     <a class="btn btn-primary" href="customers.jsp">View Customers</a>
@@ -49,7 +50,7 @@
     <div class="row" id="row-2">
         <div class="col-md-4">
             <div class="card" id="employees-card">
-                <div class="testerBox">
+                <div class="testerBox1">
                     <h4 class="card-title">Employees</h4>
                     <p class="card-text">View and manage employees</p>
                     <a class="btn btn-primary" href="employees.jsp">View Employees</a>
@@ -58,7 +59,7 @@
         </div>
         <div class="col-md-4">
             <div class="card" id="hotels-card">
-                <div class="testerBox">
+                <div class="textOL">
                     <h4 class="card-title">Hotels</h4>
                     <p class="card-text">View and manage hotels</p>
                     <a class="btn btn-primary" href="hotel.jsp">View Hotels</a>
@@ -67,7 +68,7 @@
         </div>
         <div class="col-md-4">
             <div class="card" id="hotel-chains-card">
-                <div class="testerBox">
+                <div class="testerBox1">
                     <h4 class="card-title">Hotel Chains</h4>
                     <p class="card-text">View and manage hotel chains</p>
                     <a class="btn btn-primary" href="hotelchains.jsp">View Hotel Chains</a>
