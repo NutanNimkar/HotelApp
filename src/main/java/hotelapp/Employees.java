@@ -3,25 +3,25 @@ package hotelapp;
 public class Employees {
     private int ssn;
     private String role;
-    private String firstName;
-    private String lastName;
+    private String fname;
+    private String lname;
     private String street;
     private String city;
-    private int managerSsn; // Assuming this is the manager's SSN
+    private int mssn; // Assuming this is the manager's SSN
     private int hotelId;
 
     // Constructors
     public Employees() {
     }
 
-    public Employees(int ssn, String role, String firstName, String lastName, String street, String city, int managerSsn, int hotelId) {
+    public Employees(int ssn, String role, String fname, String lname, String street, String city, int managerSsn, int hotelId) {
         this.ssn = ssn;
         this.role = role;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.fname = fname;
+        this.lname = lname;
         this.street = street;
         this.city = city;
-        this.managerSsn = managerSsn;
+        this.mssn = mssn;
         this.hotelId = hotelId;
     }
 
@@ -42,20 +42,20 @@ public class Employees {
         this.role = role;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getfname() {
+        return fname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setfname(String fname) {
+        this.fname = fname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getlname() {
+        return lname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setlname(String lname) {
+        this.lname = lname;
     }
 
     public String getStreet() {
@@ -75,11 +75,11 @@ public class Employees {
     }
 
     public int getManagerSsn() {
-        return managerSsn;
+        return mssn;
     }
 
-    public void setManagerSsn(int managerSsn) {
-        this.managerSsn = managerSsn;
+    public void setManagerSsn(int mssn) {
+        this.mssn = mssn;
     }
 
     public int getHotelId() {
@@ -96,11 +96,11 @@ public class Employees {
         return "Employee{" +
                 "ssn=" + ssn +
                 ", role='" + role + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
-                ", managerSsn=" + managerSsn +
+                ", managerSsn=" + mssn +
                 ", hotelId=" + hotelId +
                 '}';
     }

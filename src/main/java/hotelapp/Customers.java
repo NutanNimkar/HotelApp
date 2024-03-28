@@ -3,19 +3,19 @@ import java.util.Date;
 
 public class Customers {
     private int customerId;
-    private String firstName;
-    private String lastName;
+    private String fname;
+    private String lname;
     private String address;
-    private Date registrationDate;
+    private Integer registrationDate;
 
     // Constructors
     public Customers() {
     }
 
-    public Customers(int customerId, String firstName, String lastName, String address, Date registrationDate) {
+    public Customers(int customerId, String fname, String lname, String address, Integer registrationDate) {
         this.customerId = customerId;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.fname = fname;
+        this.lname = lname;
         this.address = address;
         this.registrationDate = registrationDate;
     }
@@ -29,20 +29,20 @@ public class Customers {
         this.customerId = customerId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getfname() {
+        return fname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setfname(String fname) {
+        this.fname = fname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getlname() {
+        return lname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setlname(String lname) {
+        this.lname = lname;
     }
 
     public String getAddress() {
@@ -53,11 +53,11 @@ public class Customers {
         this.address = address;
     }
 
-    public Date getRegistrationDate() {
+    public Integer getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(Integer registrationDate) {
         this.registrationDate = registrationDate;
     }
 
@@ -66,8 +66,8 @@ public class Customers {
     public String toString() {
         return "Customer{" +
                 "customerId=" + customerId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
                 ", address='" + address + '\'' +
                 ", registrationDate=" + registrationDate +
                 '}';
