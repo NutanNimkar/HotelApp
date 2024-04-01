@@ -14,9 +14,13 @@ public class HotelService {
      * @return List of hotels from database
      * @throws Exception when trying to connect to database
      */
-    public List<Hotel> getHotels() throws Exception {
+    public List<Hotel> getHotels(Integer chainId) throws Exception {
         // SQL query
-        String sql = "SELECT * FROM hotelchain.hotel"; // Assuming the table name is "hotel"
+        String sql = "SELECT * FROM \"Hotel\".hotel"; // Assuming the table name is "hotel"
+        // Check if a chainId is provided and append a WHERE clause
+        if (chainId != null) {
+            sql += " WHERE chainId = ?";
+        }
         // Database connection object
         ConnectionDB db = new ConnectionDB();
         // Data structure to store all hotels retrieved from database
@@ -26,6 +30,11 @@ public class HotelService {
         try (Connection con = db.getConnection()) {
             // Prepare the statement
             PreparedStatement stmt = con.prepareStatement(sql);
+
+            // If a chainId is provided, set it as the parameter for the SQL query
+            if (chainId != null) {
+                stmt.setInt(1, chainId);
+            }
 
             // Get the results from executing the query
             ResultSet rs = stmt.executeQuery();
