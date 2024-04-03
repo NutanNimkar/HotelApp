@@ -7,6 +7,18 @@
     <title>Rooms List</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.bookRoomBtn').click(function() {
+                // Remove the button
+                $(this).remove();
+                // Show an alert
+                alert('Booking confirmed!');
+            });
+        });
+    </script>
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
@@ -22,34 +34,39 @@
             <th>Amenities</th>
             <th>Is Single</th>
             <th>Is Extended</th>
-            <th>Problems</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <%
-            RoomsService RoomsService = new RoomsService();
-            List<Rooms> Rooms;
+            RoomsService roomsService = new RoomsService();
+            List<Rooms> rooms;
             try {
-                Rooms = RoomsService.getRooms();
+                rooms = roomsService.getRooms();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            for (Rooms Room : Rooms) {
+            for (Rooms room : rooms) {
         %>
         <tr>
-            <td><%= Room.getRoomId() %></td>
-            <td><%= Room.getHotelId() %></td>
-            <td><%= Room.isSeaView() %></td>
-            <td><%= Room.isMountainView() %></td>
-            <td><%= Room.getAmenities() %></td>
-            <td><%= Room.isSingle() %></td>
-            <td><%= Room.isExtended() %></td>
-            <td><%= Room.getProblems() %></td>
+            <td><%= room.getRoomId() %></td>
+            <td><%= room.getHotelId() %></td>
+            <td><%= room.isSeaView() ? "Yes" : "No" %></td>
+            <td><%= room.isMountainView() ? "Yes" : "No" %></td>
+            <td><%= room.getAmenties() %></td>
+            <td><%= room.isSingle() ? "Yes" : "No" %></td>
+            <td><%= room.isExtended() ? "Yes" : "No" %></td>
+            <td>
+                <% if (Math.random() < 0.5) { %>
+                    <button type="button" class="btn btn-primary bookRoomBtn" data-roomid="<%= room.getRoomId() %>">Book</button>
+                <% } %>
+            </td>
         </tr>
-        <% } %>
+        <%
+            }
+        %>
         </tbody>
     </table>
 </div>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
