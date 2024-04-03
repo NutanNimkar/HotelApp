@@ -16,7 +16,7 @@ public class HotelService {
      */
     public List<Hotel> getHotels() throws Exception {
         // SQL query
-        String sql = "SELECT * FROM hotelchain.hotel"; // Assuming the table name is "hotel"
+        String sql = "SELECT * FROM \"Hotel\".hotel"; // Assuming the table name is "hotel"
         // Database connection object
         ConnectionDB db = new ConnectionDB();
         // Data structure to store all hotels retrieved from database
