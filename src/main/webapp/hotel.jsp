@@ -15,6 +15,13 @@
 <jsp:include page="navbar.jsp"/>
 <div class="container">
     <h1>Hotel List</h1>
+    <form action="" method="get">
+        <div class="filter-section">
+            <label for="chainIdFilter">Filter by Chain ID:</label>
+            <input type="text" id="chainIdFilter" name="chainId"/>
+            <button type="submit">Filter</button>
+        </div>
+    </form>
     <table class="table">
         <thead>
         <tr>
@@ -31,9 +38,11 @@
         <tbody>
         <%
             HotelService hotelService = new HotelService();
+            String chainIdParam = request.getParameter("chainId");
+            Integer chainId = chainIdParam != null ? Integer.valueOf(chainIdParam) : null;
             List<Hotel> hotels;
             try {
-                hotels = hotelService.getHotels();
+                hotels = hotelService.getHotels(chainId);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
