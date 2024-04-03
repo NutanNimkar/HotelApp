@@ -31,8 +31,8 @@
                         <input type="text" name="name" id="name"> Name</br>
                         <input type="text" name="email" id="email"> Email</br>
                         <input type="text" name="phone" id="phone"> Phone</br>
+                        <input type="text" name="numofrooms" id="numofrooms"> NumofRooms</br>
                         <input type="text" name="street" id="street"> Street</br>
-                        <input type="number" name="numofrooms" id="numofrooms"> NumofRooms</br>
                         <input type="text" name="category" id="category">Category
                     </div>
                 </form>
@@ -80,8 +80,8 @@
             <td><%= hotel.getName() %></td>
             <td><%= hotel.getEmail() %></td>
             <td><%= hotel.getPhone() %></td>
-            <td><%= hotel.getStreet()%></td>
             <td><%= hotel.getNumOfRooms() %></td>
+            <td><%= hotel.getStreet()%></td>
             <td><%= hotel.getCategory() %></td>
             <td>
                 <a type="button" onclick="setModalFields(this)"
@@ -92,8 +92,8 @@
                    data-name="<%= hotel.getName() %>"
                    data-email="<%= hotel.getEmail() %>"
                    data-phone="<%= hotel.getPhone() %>"
-                   data-street="<%= hotel.getNumOfRooms() %>"
-                   data-numofrooms="<%= hotel.getStreet() %>"
+                   data-numofrooms="<%= hotel.getNumOfRooms() %>"
+                   data-street="<%= hotel.getStreet() %>"
                    data-category="<%= hotel.getCategory() %>"
                    data-target="#editModal">
                 <i class="fa fa-edit"></i>
@@ -142,7 +142,7 @@
         streetElement.value = row.dataset.street; // Updated to match "street" dataset attribute
         numOfRoomsElement.value = row.dataset.numofrooms; // Updated to match "numofrooms" dataset attribute
         categoryElement.value = row.dataset.category;
-        document.getElementById("modal-form").action = "HotelControllers/hotel-update-controller.jsp";
+        document.getElementById("modal-form").action = "hotel-update-controller.jsp";
         document.getElementById("modal-form").method = "POST";
     }
 
