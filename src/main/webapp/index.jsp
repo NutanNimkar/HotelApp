@@ -71,7 +71,17 @@
                 <div class="testerBox1">
                     <h4 class="card-title">Hotel Chains</h4>
                     <p class="card-text">View and manage hotel chains</p>
-                    <a class="btn btn-primary" href="hotelchains.jsp">View Hotel Chains</a>
+                    <a class="btn btn-primary" href="hotel-crud.jsp">View Hotel Chains</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card" id="hotel-update-card">
+                <div class="testerBox1">
+                    <h4 class="card-title">Hotel CRUD</h4>
+                    <p class="card-text">CRUD hotel</p>
+                    <a class="btn btn-primary" href="hotel-crud.jsp">CRUD</a>
                 </div>
             </div>
         </div>

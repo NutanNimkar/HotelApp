@@ -8,6 +8,7 @@
         <a id="navbar-items" href="<%=request.getContextPath()%>">
             <i class="fa fa-home "></i> Home
         </a>
+<%--        <a id="navbar-items" href="hotel-crud.jsp">Hotel List</a> <!-- Add this line -->--%>
     </div>
 </nav>
 </body>
