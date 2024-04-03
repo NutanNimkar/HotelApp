@@ -5,7 +5,7 @@ public class Rooms {
     private int hotelId;
     private boolean seaView;
     private boolean mountainView;
-    private String amenities;
+    private String amenties;
     private boolean isSingle;
     private boolean isExtended;
     private String problems;
@@ -14,12 +14,12 @@ public class Rooms {
     public Rooms() {
     }
 
-    public Rooms(int roomId, int hotelId, boolean seaView, boolean mountainView, String amenities, boolean isSingle, boolean isExtended, String problems) {
+    public Rooms(int roomId, int hotelId, boolean seaView, boolean mountainView, String amenties, boolean isSingle, boolean isExtended, String problems) {
         this.roomId = roomId;
         this.hotelId = hotelId;
         this.seaView = seaView;
         this.mountainView = mountainView;
-        this.amenities = amenities;
+        this.amenties = amenties;
         this.isSingle = isSingle;
         this.isExtended = isExtended;
         this.problems = problems;
@@ -58,12 +58,12 @@ public class Rooms {
         this.mountainView = mountainView;
     }
 
-    public String getAmenities() {
-        return amenities;
+    public String getAmenties() {
+        return amenties;
     }
 
-    public void setAmenities(String amenities) {
-        this.amenities = amenities;
+    public void setAmenties(String amenties) {
+        this.amenties = amenties;
     }
 
     public boolean isSingle() {
@@ -98,7 +98,7 @@ public class Rooms {
                 ", hotelId=" + hotelId +
                 ", seaView=" + seaView +
                 ", mountainView=" + mountainView +
-                ", amenities='" + amenities + '\'' +
+                ", amenities='" + amenties + '\'' +
                 ", isSingle=" + isSingle +
                 ", isExtended=" + isExtended +
                 ", problems='" + problems + '\'' +

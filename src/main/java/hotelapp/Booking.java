@@ -11,11 +11,7 @@ public class Booking {
 
     private Date bookingDate;
 
-    // Constructors
-    public Booking() {
-    }
-
-    public Booking(int bookingId, int customerId, int roomId, Date checkInDate, Date checkOutDate, Date bookingData) {
+    public Booking(int bookingId, int customerId, int roomId, Date checkInDate, Date checkOutDate, Date bookingDate) {
         this.bookingId = bookingId;
         this.customerId = customerId;
         this.roomId = roomId;

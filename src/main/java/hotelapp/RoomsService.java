@@ -9,7 +9,7 @@ import java.util.List;
 public class RoomsService {
 
     public List<Rooms> getRooms() throws Exception {
-        String sql = "SELECT * FROM hotelchain.rooms";
+        String sql = "SELECT * FROM \"Hotel\".rooms";
         ConnectionDB db = new ConnectionDB();
         List<Rooms> rooms = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class RoomsService {
                         rs.getInt("hotelId"),
                         rs.getBoolean("seaView"),
                         rs.getBoolean("mountainView"),
-                        rs.getString("amenities"),
+                        rs.getString("amenties"),
                         rs.getBoolean("isSingle"),
                         rs.getBoolean("isExtended"),
                         rs.getString("problems")
@@ -47,7 +47,7 @@ public class RoomsService {
             stmt.setInt(2, room.getHotelId());
             stmt.setBoolean(3, room.isSeaView());
             stmt.setBoolean(4, room.isMountainView());
-            stmt.setString(5, room.getAmenities());
+            stmt.setString(5, room.getAmenties());
             stmt.setBoolean(6, room.isSingle());
             stmt.setBoolean(7, room.isExtended());
             stmt.setString(8, room.getProblems());
@@ -83,7 +83,7 @@ public class RoomsService {
             stmt.setInt(1, room.getHotelId());
             stmt.setBoolean(2, room.isSeaView());
             stmt.setBoolean(3, room.isMountainView());
-            stmt.setString(4, room.getAmenities());
+            stmt.setString(4, room.getAmenties());
             stmt.setBoolean(5, room.isSingle());
             stmt.setBoolean(6, room.isExtended());
             stmt.setString(7, room.getProblems());

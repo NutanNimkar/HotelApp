@@ -32,7 +32,7 @@
                 <div class="testerBox1">
                     <h4 class="card-title">Bookings</h4>
                     <p class="card-text">View and manage bookings</p>
-                    <a class="btn btn-primary" href="bookings.jsp">View Bookings</a>
+                    <a class="btn btn-primary" href="booking.jsp">View Bookings</a>
                 </div>
             </div>
         </div>
