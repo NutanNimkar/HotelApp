@@ -76,7 +76,7 @@
             Integer chainId = chainIdParam != null ? Integer.valueOf(chainIdParam) : null;
             List<Hotel> hotels;
             try {
-                hotels = hotelService.getHotels(chainId);
+                hotels = hotelService.getHotels();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -139,8 +139,8 @@
         var nameElement = document.getElementById("name");
         var emailElement = document.getElementById("email");
         var phoneElement = document.getElementById("phone");
-        var streetElement = document.getElementById("numofrooms"); // Updated to match "numofrooms" dataset attribute
-        var numOfRoomsElement = document.getElementById("street"); // Updated to match "street" dataset attribute
+        var streetElement = document.getElementById("street"); // Updated to match "street" dataset attribute
+        var numOfRoomsElement = document.getElementById("numofrooms"); // Updated to match "numofrooms" dataset attribute
         var categoryElement = document.getElementById("category");
         idElement.value = row.dataset.id;
         chainIdElement.value = row.dataset.chainid;
