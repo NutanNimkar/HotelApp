@@ -3,6 +3,7 @@ package hotelapp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +15,13 @@ public class HotelService {
      * @return List of hotels from database
      * @throws Exception when trying to connect to database
      */
-    public List<Hotel> getHotels(Integer chainId) throws Exception {
+    public List<Hotel> getHotels() throws Exception {
         // SQL query
-        String sql = "SELECT * FROM \"Hotel\".hotel"; // Assuming the table name is "hotel"
+        String sql = "SELECT * FROM hotelchain.hotel"; // Assuming the table name is "hotel"
         // Check if a chainId is provided and append a WHERE clause
-        if (chainId != null) {
-            sql += " WHERE chainId = ?";
-        }
+//        if (chainId != null) {
+//            sql += " WHERE chainId = ?";
+//        }
         // Database connection object
         ConnectionDB db = new ConnectionDB();
         // Data structure to store all hotels retrieved from database
@@ -32,9 +33,9 @@ public class HotelService {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             // If a chainId is provided, set it as the parameter for the SQL query
-            if (chainId != null) {
-                stmt.setInt(1, chainId);
-            }
+//            if (chainId != null) {
+//                stmt.setInt(1, chainId);
+//            }
 
             // Get the results from executing the query
             ResultSet rs = stmt.executeQuery();
@@ -44,11 +45,12 @@ public class HotelService {
                 // Create a new Hotel object
                 Hotel hotel = new Hotel(
                         rs.getInt("hotelId"),
-                        rs.getInt("chainId"),
+                        rs.getInt("chainid"),
                         rs.getString("city"),
                         rs.getString("name"),
                         rs.getString("email"),
                         rs.getString("phone"),
+                        rs.getString("street"),
                         rs.getInt("numOfRooms"),
                         rs.getString("category")
                 );
@@ -81,44 +83,79 @@ public class HotelService {
      * @return String message indicating if the hotel was successfully deleted or not
      * @throws Exception when trying to connect to the database
      */
-    public String deleteHotel(Integer hotelId) throws Exception {
-        // Database connection object
+    public String deleteHotel(int hotelId) throws Exception {
         ConnectionDB db = new ConnectionDB();
         String message = "";
 
-        // SQL query
-        String sql = "DELETE FROM hotelchain.hotel WHERE hotelId = ?";
-
-        // Try to connect to the database, catch any exceptions
         try (Connection con = db.getConnection()) {
-            // Prepare the statement
-            PreparedStatement stmt = con.prepareStatement(sql);
+            // Check if there are any related rooms
+            boolean roomsExist = checkRoomsExist(con, hotelId);
+            // Check if there are any related employees
+            boolean employeesExist = checkEmployeesExist(con, hotelId);
 
-            // Set the parameter for the hotel ID
-            stmt.setInt(1, hotelId);
-
-            // Execute the query
-            int rowsAffected = stmt.executeUpdate();
-
-            // Check if any rows were affected
-            if (rowsAffected == 1) {
-                message = "Hotel successfully deleted!";
-            } else {
-                message = "Hotel with ID " + hotelId + " not found.";
+            // If there are related rooms, delete them first
+            if (roomsExist) {
+                deleteRelatedRooms(con, hotelId);
             }
 
-            // Close the statement
+            // If there are related employees, delete them first
+            if (employeesExist) {
+                deleteRelatedEmployees(con, hotelId);
+            }
+
+            // Proceed with deleting the hotel
+            String sql = "DELETE FROM hotelchain.hotel WHERE hotelId = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, hotelId);
+            stmt.executeUpdate();
             stmt.close();
+
+            message = "Hotel successfully deleted!";
         } catch (Exception e) {
             message = "Error while deleting hotel: " + e.getMessage();
         } finally {
-            // Close the database connection
             db.close();
         }
 
         return message;
     }
 
+    private boolean checkRoomsExist(Connection con, int hotelId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM hotelchain.rooms WHERE hotelId = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, hotelId);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            int roomCount = rs.getInt(1);
+            return roomCount > 0;
+        }
+        return false;
+    }
+    private boolean checkEmployeesExist(Connection con, int hotelId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM hotelchain.employees WHERE hotelId = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, hotelId);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            int employeeCount = rs.getInt(1);
+            return employeeCount > 0;
+        }
+        return false;
+    }
+    private void deleteRelatedRooms(Connection con, int hotelId) throws SQLException, SQLException {
+        String sql = "DELETE FROM hotelchain.rooms WHERE hotelId = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, hotelId);
+        stmt.executeUpdate();
+        stmt.close();
+    }
+    private void deleteRelatedEmployees(Connection con, int hotelId) throws SQLException {
+        String sql = "DELETE FROM hotelchain.employees WHERE hotelId = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, hotelId);
+        stmt.executeUpdate();
+        stmt.close();
+    }
     /**
      * Method to add a new hotel to the database
      *
@@ -132,7 +169,7 @@ public class HotelService {
         String message = "";
 
         // SQL query
-        String sql = "INSERT INTO hotelchain.hotel (chainId, city, name, email, phone, numOfRooms, category) " +
+        String sql = "INSERT INTO hotelchain.hotel (city, name, email, phone, street, numOfRooms, category) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         // Try to connect to the database, catch any exceptions
@@ -141,11 +178,12 @@ public class HotelService {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             // Set parameters for the new hotel
-            stmt.setInt(1, hotel.getChainId());
-            stmt.setString(2, hotel.getCity());
-            stmt.setString(3, hotel.getName());
-            stmt.setString(4, hotel.getEmail());
-            stmt.setString(5, hotel.getPhone());
+//            stmt.setInt(1, hotel.getChainId());
+            stmt.setString(1, hotel.getCity());
+            stmt.setString(2, hotel.getName());
+            stmt.setString(3, hotel.getEmail());
+            stmt.setString(4, hotel.getPhone());
+            stmt.setString(5,hotel.getStreet());
             stmt.setInt(6, hotel.getNumOfRooms());
             stmt.setString(7, hotel.getCategory());
 
@@ -182,11 +220,12 @@ public class HotelService {
         String message = "";
 
         // SQL query
-        String sql = "UPDATE hotelchain.hotel SET chainId=?, city=?, name=?, email=?, phone=?, numOfRooms=?, category=? WHERE hotelId=?";
+        String sql = "UPDATE hotelchain.hotel SET  chainId=?, city=?, name=?, email=?, phone=?, street=? ,numOfRooms=?, category=? WHERE hotelId=?";
 
         // Try to connect to the database, catch any exceptions
         try (Connection con = db.getConnection()) {
             // Prepare the statement
+            System.out.println("Preparing statement...");
             PreparedStatement stmt = con.prepareStatement(sql);
 
             // Set parameters for the updated hotel
@@ -195,12 +234,15 @@ public class HotelService {
             stmt.setString(3, hotel.getName());
             stmt.setString(4, hotel.getEmail());
             stmt.setString(5, hotel.getPhone());
-            stmt.setInt(6, hotel.getNumOfRooms());
-            stmt.setString(7, hotel.getCategory());
-            stmt.setInt(8, hotel.getHotelId());
+            stmt.setString(6, hotel.getStreet());
+            stmt.setInt(7, hotel.getNumOfRooms());
+            stmt.setString(8, hotel.getCategory());
+            stmt.setInt(9, hotel.getHotelId()); // Add this line
 
             // Execute the query
+            System.out.println("Executing update query...");
             int rowsAffected = stmt.executeUpdate();
+            System.out.println("Rows affected: " + rowsAffected);
 
             // Check if any rows were affected
             if (rowsAffected == 1) {
@@ -210,8 +252,11 @@ public class HotelService {
             }
 
             // Close the statement
+            System.out.println("Closing statement...");
             stmt.close();
         } catch (Exception e) {
+            System.err.println("Error while updating hotel: " + e.getMessage());
+            e.printStackTrace(); // Print stack trace for debugging
             message = "Error while updating hotel: " + e.getMessage();
         } finally {
             // Close the database connection

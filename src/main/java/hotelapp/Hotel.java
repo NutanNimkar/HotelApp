@@ -7,13 +7,14 @@ public class Hotel {
 
     private String name;
     private String email;
-    private int numOfRooms;
+    private int  numOfRooms;
+    private String street;
     private String phone;
     private String category;
     public Hotel() {
     }
 
-    public Hotel(int hotelId, int chainId, String city, String name, String email, String phone, int numOfRooms, String category) {
+    public Hotel(int hotelId, int chainId, String city, String name, String email, String phone,  String street, int numOfRooms, String category) {
         this.hotelId = hotelId;
         this.chainId = chainId;
         this.city = city;
@@ -21,6 +22,7 @@ public class Hotel {
         this.email = email;
         this.phone = phone;
         this.numOfRooms = numOfRooms;
+        this.street = street;
         this.category = category;
     }
 
@@ -81,6 +83,11 @@ public class Hotel {
         this.numOfRooms = numOfRooms;
     }
 
+    public String getStreet() { return street; };
+
+    public void setStreet( String street){ this.street = street; };
+
+
     public String getCategory() {
         return category;
     }
@@ -100,6 +107,7 @@ public class Hotel {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", numOfRooms=" + numOfRooms +
+                ", street=" + street +
                 ", category='" + category + '\'' +
                 '}';
     }

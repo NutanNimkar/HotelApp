@@ -66,16 +66,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card" id="hotel-chains-card">
-                <div class="testerBox1">
-                    <h4 class="card-title">Hotel Chains</h4>
-                    <p class="card-text">View and manage hotel chains</p>
-                    <a class="btn btn-primary" href="hotelchains.jsp">View Hotel Chains</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="/assets/js/jquery.min.js"></script>
